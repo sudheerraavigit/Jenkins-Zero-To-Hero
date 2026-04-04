@@ -66,6 +66,7 @@ pipeline {
                     cd $WORKSPACE
                     # confirm git repo exists
                     git status
+                    git config --global --add safe.directory $WORKSPACE
                     git config user.email "sudheer6891@gmail.com"
                     git config user.name "sudheer raavi"
                     BUILD_NUMBER=${BUILD_NUMBER}
