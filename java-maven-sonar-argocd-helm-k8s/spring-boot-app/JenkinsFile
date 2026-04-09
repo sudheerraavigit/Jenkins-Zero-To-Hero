@@ -95,7 +95,7 @@ pipeline {
                     git config user.email "sudheer6891@gmail.com"
                     git config user.name "sudheer raavi"
 
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" \
+                    sed -i "s|ultimate-cicd:.*|ultimate-cicd:${BUILD_NUMBER}|g" \
                     java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
 
                     git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
