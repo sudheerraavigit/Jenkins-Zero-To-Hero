@@ -5,6 +5,9 @@ pipeline {
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
+  environment {
+      EMAIL_ID = "sudheer6891@gmail.com"
+  }  
   stages {
     stage('Checkout') {
       steps {
@@ -80,4 +83,24 @@ pipeline {
         }
     }
   }
+}
+    post {
+        failure {
+            mail to: "${EMAIL_ID}",
+                 subject: "Jenkins Pipeline Failed: ${env.JOB_NAME}",
+                 body: """
+Pipeline failed.
+
+Job Name: ${env.JOB_NAME}
+Build Number: ${env.BUILD_NUMBER}
+Build URL: ${env.BUILD_URL}
+
+Please check the failure.
+"""
+        }
+
+        success {
+            echo "Pipeline completed successfully"
+        }
+    }
 }
